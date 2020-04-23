@@ -5,8 +5,9 @@ $(document).ready(function () {
     var inputSend = $('.sms-input'); // input
     var chat = $('.display-chat'); //chat
 
-    var time = new Date(); //refs date
-    // time.getHours() + ':' + time.getMinutes(),
+    
+
+    
 
     // init handlebar
     var source = $('#sms-template').html(); //refs template 
@@ -17,13 +18,17 @@ $(document).ready(function () {
     // sent at click
     button.click(function(){
         var sms = inputSend.val().trim();
+        var time = new Date(); //refs date
+        var hh = time.getHours();
+        var min = time.getMinutes();
+        var oraInvio = hh + ':' + min;
         
         console.log(sms);
 
         // creiamo oggetto con i valori 
         var sent = {
             text: sms,
-            time: '13:55',
+            time: oraInvio,
             typeSms: 'sent'
         }
         
@@ -36,12 +41,11 @@ $(document).ready(function () {
         // reset input
         inputSend.val('');
 
-
         // risposta bot
         setTimeout(function(){
             var received = {
                 text: 'Ok Grazie.',
-                time: '13:56',
+                time: oraInvio,
                 typeSms: 'received'
             }
 
@@ -49,7 +53,7 @@ $(document).ready(function () {
             console.log(html);
 
             chat.append(html);
-            
+
         }, 2000);
     });
     
