@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    width: 1170px;
+    height: 100vh;
+    margin: 0 auto;
+}
+
+.sms {
+    width: 500px;
+    margin-top: 10px;
+    padding: 10px;
+    background: #ccc;
+    border-radius: 10px;
+}
+
+.sms.sent {
+    background-color: lightblue;
+}
+
+.sms.received {
+    background-color: lightcoral;
+}
+
+.sms .sms-time {
+    text-align: right;
+}
