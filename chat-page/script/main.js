@@ -21,12 +21,12 @@ $(document).ready(function () {
     var generatedSms = [
         {
             text: 'ciao come stai?',
-            time: '11:52',
+            time: actualTime(),
             typeSms: 'sent'
         },
         {
             text: 'bene, quando ci vediamo?',
-            time: '11:53',
+            time: actualTime(),
             typeSms: 'received'
         }
     ];
@@ -41,17 +41,13 @@ $(document).ready(function () {
     // sent at click
     button.click(function(){
         var sms = inputSend.val().trim();
-        var time = new Date(); //refs date
-        var hh = time.getHours();
-        var min = time.getMinutes();
-        var oraInvio = hh + ':' + min;
-        
+
         console.log(sms);
 
         // creiamo oggetto con i valori 
         var sent = {
             text: sms,
-            time: oraInvio,
+            time: actualTime(),
             typeSms: 'sent'
         }
         
@@ -68,7 +64,7 @@ $(document).ready(function () {
         setTimeout(function(){
             var received = {
                 text: 'Ok Grazie.',
-                time: oraInvio,
+                time: actualTime(),
                 typeSms: 'received'
             }
 
@@ -83,3 +79,27 @@ $(document).ready(function () {
 
 
 }); // <-- end Reay
+
+
+/**
+ * Function
+ */
+
+ // add zero at time number < 10
+function addZero (number) {
+
+    if (number < 10) {
+        number = '0' + number;
+    }
+
+    return number;
+}
+
+// function-dinamic time 
+function actualTime() {
+    
+    var data = new Date();
+    var h = addZero(data.getHours());
+    var m = addZero(data.getMinutes());
+    return h + ':' + m;
+};
