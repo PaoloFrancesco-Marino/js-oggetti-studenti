@@ -6,16 +6,9 @@ $(document).ready(function () {
     var chat = $('.display-chat'); //chat
 
     
-
-    
-
     // init handlebar
     var source = $('#sms-template').html(); //refs template 
     var template = Handlebars.compile(source);
-
-    // console.log(source);
-
-
 
     // add array object data
     var generatedSms = [
@@ -39,43 +32,15 @@ $(document).ready(function () {
 
 
     // sent at click
-    button.click(function(){
-        var sms = inputSend.val().trim();
-
-        console.log(sms);
-
-        // creiamo oggetto con i valori 
-        var sent = {
-            text: sms,
-            time: actualTime(),
-            typeSms: 'sent'
-        }
-        
-        // mostriamo nell'html 
-        var html = template(sent);
-        console.log(html);
-
-        chat.append(html);
-
-        // reset input
-        inputSend.val('');
-
-        // risposta bot
-        setTimeout(function(){
-            var received = {
-                text: 'Ok Grazie.',
-                time: actualTime(),
-                typeSms: 'received'
-            }
-
-            var html = template(received);
-            console.log(html);
-
-            chat.append(html);
-
-        }, 2000);
+    button.click(function() {
+        sendMessage(inputSend);
     });
     
+    inputSend.keyup(function (e) { 
+        if(e.which == 13 || e.keycode == 13) {
+            sendMessage(inputSend);
+        }
+    });
 
 
 }); // <-- end Reay
@@ -103,3 +68,47 @@ function actualTime() {
     var m = addZero(data.getMinutes());
     return h + ':' + m;
 };
+
+
+function sendMessage (input) {
+
+    var source = $('#sms-template').html(); //refs template 
+    var template = Handlebars.compile(source);
+
+    var chat = $('.display-chat'); //chat
+
+    var sms = input.val().trim();
+
+        console.log(sms);
+
+        // creiamo oggetto con i valori 
+        var sent = {
+            text: sms,
+            time: actualTime(),
+            typeSms: 'sent'
+        }
+        
+        // mostriamo nell'html 
+        var html = template(sent);
+        console.log(html);
+
+        chat.append(html);
+
+        // reset input
+        input.val('');
+
+        // risposta bot
+        setTimeout(function(){
+            var received = {
+                text: 'Ok Grazie.',
+                time: actualTime(),
+                typeSms: 'received'
+            }
+
+            var html = template(received);
+            console.log(html);
+
+            chat.append(html);
+
+        }, 2000);
+}
