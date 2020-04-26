@@ -15,6 +15,29 @@ $(document).ready(function () {
 
     // console.log(source);
 
+
+
+    // add array object data
+    var generatedSms = [
+        {
+            text: 'ciao come stai?',
+            time: '11:52',
+            typeSms: 'sent'
+        },
+        {
+            text: 'bene, quando ci vediamo?',
+            time: '11:53',
+            typeSms: 'received'
+        }
+    ];
+
+    $.each(generatedSms, function(i) {
+        console.log(generatedSms[i]);
+        var addSms = template(generatedSms[i]);
+        chat.append(addSms);
+    });
+
+
     // sent at click
     button.click(function(){
         var sms = inputSend.val().trim();
